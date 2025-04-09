@@ -1,66 +1,119 @@
-# Dispositivos Concretos de Impressão e Digitalização em Java
+# 🖨️📠 Exemplo de Herança Múltipla com Interfaces em Java
 
-Este projeto demonstra o uso de herança, interfaces e classes abstratas em Java para modelar dispositivos eletrônicos como impressoras, scanners e dispositivos multifuncionais. Utiliza implementações concretas dessas funcionalidades.
+Este projeto demonstra como aplicar **herança múltipla** em Java utilizando **interfaces**.
+ Como Java não permite herança múltipla de classes, o uso de interfaces é a forma adequada de implementar essa funcionalidade.
 
-## Estrutura do Projeto
+## 🚀 Objetivo
 
-O projeto está organizado nos seguintes pacotes e classes:
+Simular dispositivos eletrônicos como impressoras, scanners e multifuncionais (combo), aplicando os **princípios da Programação Orientada a Objetos (POO)**
+ e boas práticas de design, como os **princípios SOLID**.
 
-### Pacote `application`
-- **`Program`**: Classe principal que instancia e executa os dispositivos concretos.
+---
 
-### Pacote `devices`
-- **`Device`**: Classe abstrata que representa um dispositivo com um número de série e um método abstrato `processDoc()`.
-- **`ConcreteScanner`**: Implementa um scanner concreto, herda de `Device` e possui o método `scan()`.
-- **`ConcretePrinter`**: Implementa uma impressora concreta, herda de `Device` e possui o método `print()`.
-- **`ComboDevice`**: Dispositivo multifuncional concreto que combina `Scanner` e `Printer`, implementando ambas as interfaces.
-- **`Scanner`**: Interface que define o método `scan()`.
-- **`Printer`**: Interface que define o método `print()`.
+## 📂 Estrutura do Projeto
 
-## Funcionamento
+```
+src/
+├── application/
+│   └── Program.java
+└── devices/
+    ├── ComboDevice.java
+    ├── ConcretePrinter.java
+    ├── ConcreteScanner.java
+    ├── Device.java
+    ├── Printer.java
+    └── Scanner.java
+```
 
-A classe `Program` testa as funcionalidades dos dispositivos concretos:
-1. Cria e utiliza um `ConcreteScanner`.
-2. Cria e utiliza um `ConcretePrinter`.
-3. Cria e utiliza um `ComboDevice`, que pode imprimir e escanear.
+---
 
-### Exemplo de Saída
-```plaintext
-Scanner processing: My Email
-Scan result: Scanned content
+## ⚙️ Tecnologias Utilizadas
 
-Printer processing: My Letter
-Printing: My Letter
+- Java 17+ (ou superior)
+- Paradigmas e princípios de design (POO, SOLID)
 
-Combo processing: My dissertation: 
+---
+
+## 💡 Conceitos e Técnicas Aplicadas
+
+### ✅ **Abstração**
+A classe abstrata `Device` representa qualquer dispositivo eletrônico genérico.
+ Define o método abstrato `processDoc` que deve ser implementado pelas subclasses.
+
+```java
+public abstract class Device {
+    public abstract void processDoc(String doc);
+}
+```
+
+---
+
+### ✅ **Encapsulamento**
+O atributo `serialNumber` da classe `Device` está protegido (privado), e acessado/modificado por meio de métodos getters e setters.
+
+---
+
+### ✅ **Interfaces**
+As interfaces `Printer` e `Scanner` segregam funcionalidades específicas:
+- `Printer` possui o método `print(String doc)`
+- `Scanner` possui o método `scan()`
+
+Isso promove um design modular e flexível.
+
+---
+
+### ✅ **Herança Múltipla com Interfaces**
+A classe `ComboDevice` implementa **duas interfaces** (`Printer` e `Scanner`) e **herda** da classe abstrata `Device`.
+ Essa composição resolve o problema da **herança múltipla**, respeitando as limitações da linguagem Java.
+
+```java
+public class ComboDevice extends Device implements Printer, Scanner {
+    ...
+}
+```
+
+---
+
+### ✅ **Princípio da Segregação de Interface (ISP)** — SOLID
+Cada interface define um conjunto específico de responsabilidades. Isso evita que classes dependam de métodos que não usam, promovendo a coesão.
+
+---
+
+### ✅ **Programação Orientada a Interfaces**
+No `main`, o uso de polimorfismo é evidente com o `ComboDevice`, que age como impressora e scanner por meio das interfaces.
+
+---
+
+## 🧪 Demonstração
+
+```java
+ComboDevice c = new ComboDevice("2081");
+c.processDoc("My dissertation:");
+c.print("My dissertation");
+System.out.println("Scan result: " + c.scan());
+```
+
+Saída esperada:
+
+```
+Combo processing: My dissertation:
 Combo printing: My dissertation
 Scan result: Combo scan result
 ```
 
-## Tecnologias Utilizadas
-- **Java 8+**
-- **Paradigmas:** Programação Orientada a Objetos (POO)
-- **Princípios:** Herança, polimorfismo, encapsulamento, abstração
+---
 
-## Como Executar o Programa
-1. Clone o repositório ou copie os arquivos.
-2. Compile as classes:
-   ```sh
-   javac application/Program.java devices/*.java
-   ```
-3. Execute o programa:
-   ```sh
-   java application.Program
-   ```
+## 🧼 Boas Práticas Aplicadas
 
-## Autores e Reconhecimentos
-Alan Kay: Pioneiro da Programação Orientada a Objetos (POO).
+- **Nomes descritivos e intuitivos** para classes e métodos.
+- **Código limpo** e organizado em pacotes (`devices`, `application`).
+- **Separação de responsabilidades**, cada classe com um único propósito.
+- **Evita repetição** de código com uso de herança e interfaces.
 
-Erich Gamma e outros: Autores de Design Patterns, influenciaram o uso de interfaces e classes abstratas.
+---
 
-Robert C. Martin ("Uncle Bob"): Popularizou os conceitos de Clean Code, que foram seguidos ao longo do desenvolvimento deste projeto.
+## 📘 Conclusão
 
-Professor Nélio Alves: Professor responsável pelo curso que forneceu o conhecimento e as bases para a implementação dos conceitos de POO e Design Patterns utilizados neste projeto.
+Este exemplo mostra como aplicar **herança múltipla de maneira segura** e eficaz em Java, utilizando interfaces para representar comportamentos distintos. Também reforça a importância de **design orientado a princípios**, resultando em código mais **manutenível, reutilizável e escalável**.
 
-Ronaldo Rodrigues: Estudante que está se especializando em programação, aplicando os conhecimentos adquiridos no curso.
-
+---
